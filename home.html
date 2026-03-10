@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vertex Link — Sites vitrines & landing pages codés à la main">
+<meta property="og:description" content="Des sites qui donnent envie d'agir. Zéro template, design exclusif, livré en 14 jours.">
+<meta property="og:site_name" content="Vertex Link">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vertex Link — Sites vitrines & landing pages codés à la main">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Vertex Link — Sites vitrines premium codés à la main. Design qui convertit, Lighthouse 97+, livré en 14 jours.">
+<title>Vertex Link — Agence Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ════ HERO ════ */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 5rem) var(--pad) 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(0,0,0,.036) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.036) 1px,transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 90% 65% at 50% 0%,black,transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 65% at 50% 0%,black,transparent 80%);
+}
+.hero::after {
+  content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.05); top: 50%; left: 50%; transform: translate(-50%,-55%);
+  pointer-events: none; z-index: 0;
+}
+.hero__inner { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; width: 100%; }
+
+/* Badge */
+.hero__badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--f-m); font-size: .63rem; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid rgba(0,0,0,.1); padding: .3rem .9rem; border-radius: 100px;
+  margin-bottom: 3rem;
+  opacity: 0; animation: vlu .5s var(--ease) .1s forwards;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #e85c2e; box-shadow: 0 0 8px rgba(232,103,26,.5); animation: blink 2.5s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+@keyframes vlu { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+@keyframes ln-up { to { transform: translateY(0); } }
+
+/* Titre massif */
+.hero__h1 {
+  font-family: var(--f-d); font-weight: 800;
+  font-size: clamp(2.6rem, 6.2vw, 5.8rem);
+  letter-spacing: -.052em; line-height: .92; color: #111;
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+.hero__h1 em { color: #e85c2e; }
+.hero__h1 .ln { display: block; overflow: hidden; }
+.hero__h1 .li { display: block; transform: translateY(110%); animation: ln-up 1s cubic-bezier(.16,1,.3,1) forwards; }
+.hero__h1 .ln:nth-child(1) .li { animation-delay: .18s; }
+.hero__h1 .ln:nth-child(2) .li { animation-delay: .3s; }
+.hero__h1 .ln:nth-child(3) .li { animation-delay: .42s; }
+.hero__h1 em { font-style: italic; font-weight: 400; }
+
+/* Sub + CTA */
+.hero__foot {
+  display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+  opacity: 0; animation: vlu .7s var(--ease) .6s forwards; text-align: center;
+}
+.hero__sub { font-family: var(--f-m); font-size: .84rem; color: var(--muted); line-height: 1.9; max-width: 40ch; }
+.hero__ctas { display: flex; flex-direction: row; gap: .75rem; flex-wrap:wrap; justify-content:center; }
+
+/* Proof */
+.hero__proof {
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  margin-top: 5rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem;
+  border-top: 1px solid rgba(0,0,0,.07); padding-top: 1.5rem;
+  position: relative; z-index: 1;
+  opacity: 0; animation: vlu .5s var(--ease) .8s forwards;
+}
+.proof-item { display: flex; flex-direction: column; gap: .2rem; }
+.proof-val { font-family: var(--f-d); font-weight: 800; font-size: 1.05rem; letter-spacing: -.03em; color: #111; }
+.proof-lbl { font-family: var(--f-m); font-size: .6rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.proof-sep { width: 1px; height: 32px; background: rgba(0,0,0,.08); }
+
+/* Marqueurs */
+.hmark { position: absolute; width: 14px; height: 14px; pointer-events: none; z-index: 1; opacity: 0; animation: vlu .4s ease forwards; }
+.hmark::before,.hmark::after { content:''; position:absolute; background:rgba(0,0,0,.13); }
+.hmark::before { width:1px; height:100%; left:6.5px; }
+.hmark::after  { height:1px; width:100%; top:6.5px; }
+.hm1{top:20%;left:4%;animation-delay:.9s;} .hm2{top:20%;right:4%;animation-delay:1s;}
+.hm3{bottom:20%;left:4%;animation-delay:1.1s;} .hm4{bottom:20%;right:4%;animation-delay:1.2s;}
+
+.hero__corner { position:absolute; z-index:1; font-family:var(--f-m); font-size:.56rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(0,0,0,.18); opacity:0; animation:vlu .4s ease .95s forwards; }
+.hc-bl{bottom:2rem;left:var(--pad);} .hc-br{bottom:2rem;right:var(--pad);}
+
+
+/* ════ FEATURES ════ */
+.feats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+  margin-top: 3.5rem;
+}
+.feat {
+  padding: 2.5rem; border-right: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease), background .25s;
+}
+.feat.on { opacity: 1; transform: none; }
+.feat:nth-child(2).on { transition-delay: .1s; }
+.feat:nth-child(3).on { transition-delay: .2s; }
+.feat:last-child { border-right: none; }
+.feat:hover { background: var(--bg2); }
+.feat::before { content:''; position:absolute; left:0; top:0; width:2px; height:0; background:#e85c2e; transition:height .4s var(--ease); }
+.feat:hover::before { height:100%; }
+.feat-deco { position:absolute; right:-.05em; bottom:-.25em; font-family:var(--f-d); font-weight:800; font-size:8rem; line-height:1; letter-spacing:-.06em; color:rgba(0,0,0,.03); pointer-events:none; user-select:none; transition:transform .5s var(--ease); }
+.feat:hover .feat-deco { transform:scale(1.04) translateX(3px); }
+.feat-n { font-family:var(--f-m); font-size:.6rem; letter-spacing:.1em; color:var(--faint); margin-bottom:1rem; }
+.feat-title { font-family:var(--f-d); font-weight:800; font-size:1rem; letter-spacing:-.028em; color:#111; margin-bottom:.75rem; transition:transform .3s var(--ease); }
+.feat:hover .feat-title { transform:translateX(5px); }
+.feat-desc { font-family:var(--f-m); font-size:.74rem; color:var(--muted); line-height:1.85; margin-bottom:1rem; }
+.feat-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+.feat-tag { font-family:var(--f-m); font-size:.58rem; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .6rem; border:1px solid var(--border); border-radius:100px; color:var(--muted); transition:border-color .2s; }
+.feat:hover .feat-tag { border-color:#e85c2e; color:#e85c2e; }
+
+
+/* ════ STATS ════ */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 20px; overflow: hidden;
+  margin-top: 3.5rem;
+}
+.stat {
+  padding: 3rem 2rem; text-align: center; border-right: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease), background .2s;
+}
+.stat.on { opacity: 1; transform: none; }
+.stat:nth-child(2).on { transition-delay:.1s; }
+.stat:nth-child(3).on { transition-delay:.2s; }
+.stat:nth-child(4).on { transition-delay:.3s; }
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(255,255,255,.04); }
+.stat::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:1px; background:rgba(255,255,255,.3); transform:scaleX(0); transition:transform .4s var(--ease); }
+.stat:hover::after { transform:scaleX(1); }
+.stat-num {
+  font-family: var(--f-d); font-weight: 800;
+  font-size: clamp(2.4rem,4vw,3.2rem); letter-spacing: -.055em; line-height: 1;
+  color: #fff; margin-bottom: .5rem;
+  display: flex; align-items: flex-start; justify-content: center; gap: .03em;
+  transition: transform .35s var(--ease);
+}
+.stat:hover .stat-num { transform: translateY(-5px); }
+.stat-num sup { font-size: .38em; margin-top: .2em; font-weight: 700; color: #e85c2e; }
+.stat-lbl { font-family: var(--f-m); font-size: .64rem; color: rgba(255,255,255,.45); }
+
+
+/* ════ PROCESS ════ */
+.process-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+.step-item {
+  display: grid; grid-template-columns: 2.5rem 1fr;
+  gap: 0 .875rem; padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.07); cursor: pointer; position: relative;
+  transition: padding-left .22s var(--ease);
+}
+.step-item:first-child { border-top: 1px solid rgba(0,0,0,.07); }
+.step-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:transparent; transition:background .22s; }
+.step-item.on { padding-left: .5rem; }
+.step-item.on::before { background: #e85c2e; }
+.step-n { font-family:var(--f-m); font-size:.63rem; color:var(--faint); padding-top:.05rem; transition:color .22s; }
+.step-item.on .step-n { color: #e85c2e; }
+.step-t { font-family:var(--f-d); font-weight:800; font-size:.92rem; letter-spacing:-.025em; color:#111; margin-bottom:.25rem; }
+.step-d { font-family:var(--f-m); font-size:.73rem; color:var(--muted); line-height:1.8; max-height:0; overflow:hidden; opacity:0; transition:max-height .4s ease,opacity .3s; }
+.step-item.on .step-d { max-height:100px; opacity:1; }
+
+/* Code window */
+.code-win {
+  position: sticky; top: calc(var(--nav-h) + 2rem);
+  background: #0d0d0d; border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .7s ease .25s, transform .7s var(--ease) .25s;
+}
+.code-win.on { opacity: 1; transform: none; }
+.cw-bar { display:flex; align-items:center; gap:.4rem; padding:.8rem 1.2rem; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.02); }
+.cw-d { width:7px; height:7px; border-radius:50%; }
+.cwd-r{background:#ff5f57} .cwd-y{background:#febc2e} .cwd-g{background:#28c840}
+.cw-file { margin-left:.5rem; font-family:var(--f-m); font-size:.6rem; color:rgba(255,255,255,.28); }
+.cw-body { padding:1.5rem; }
+.cw-row { display:flex; gap:1rem; line-height:2.1; }
+.cw-ln { font-family:var(--f-m); font-size:.6rem; color:rgba(255,255,255,.14); user-select:none; min-width:1rem; text-align:right; }
+.cw-code { font-family:var(--f-m); font-size:.7rem; white-space:pre; }
+.ck{color:#79b8ff} .cs{color:#9ecbff} .cf{color:#b392f0} .cc{color:rgba(255,255,255,.28);font-style:italic} .cn{color:#ffab70} .cp{color:rgba(255,255,255,.65)}
+
+
+/* ════ CTA FINAL SPLIT ════ */
+.cta-final {
+  margin-top: 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border); border-radius: 22px; overflow: hidden; min-height: 520px;
+}
+.ctaf-left {
+  padding: clamp(3rem,5.5vw,5.5rem);
+  display: flex; flex-direction: column; justify-content: center; gap: 1.4rem;
+  border-right: 1px solid var(--border); position: relative;
+}
+.ctaf-avail { display:inline-flex; align-items:center; gap:.45rem; font-family:var(--f-m); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.ctaf-dot { width:6px; height:6px; border-radius:50%; background:#e85c2e; box-shadow:0 0 7px rgba(232,103,26,.6); animation:blink 2s ease-in-out infinite; flex-shrink:0; }
+.ctaf-h { font-family:var(--f-d); font-weight:800; font-size:clamp(2rem,4.5vw,3.8rem); letter-spacing:-.055em; line-height:.9; color:#111; }
+.ctaf-ln { display:block; overflow:hidden; }
+.ctaf-li { display:block; transform:translateY(105%); transition:transform .85s var(--ease); }
+.cta-final.on .ctaf-li { transform:translateY(0); }
+.cta-final.on .ctaf-ln:nth-child(2) .ctaf-li { transition-delay:.12s; }
+.cta-final.on .ctaf-ln:nth-child(3) .ctaf-li { transition-delay:.24s; }
+.ctaf-h em { font-style:italic; font-weight:400; }
+.ctaf-p { font-family:var(--f-m); font-size:.78rem; color:var(--muted); line-height:1.8; }
+.ctaf-btns { display:flex; gap:.75rem; flex-wrap:wrap; }
+.ctaf-note { font-family:var(--f-m); font-size:.6rem; color:var(--faint); letter-spacing:.04em; }
+
+/* Droite noire */
+.ctaf-right { background:#0d0d0d; position:relative; overflow:hidden; }
+.ctaf-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:40px 40px; }
+.ctaf-card { position:absolute; z-index:1; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:1.2rem 1.5rem; backdrop-filter:blur(14px); opacity:0; transition:opacity .5s ease; }
+.cta-final.on .ctaf-card { opacity:1; }
+.cc-score { bottom:2.5rem; left:2.5rem; min-width:160px; animation:flt-a 5.5s ease-in-out infinite; }
+.cc-time  { top:2.5rem; right:2.5rem; animation:flt-b 5.5s ease-in-out .8s infinite; }
+.cc-live  { top:50%; left:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:.55rem; white-space:nowrap; animation:flt-c 5.5s ease-in-out 1.3s infinite; }
+.cta-final.on .cc-score { transition-delay:.2s; }
+.cta-final.on .cc-time  { transition-delay:.4s; }
+.cta-final.on .cc-live  { transition-delay:.6s; }
+@keyframes flt-a { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)} }
+@keyframes flt-b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+@keyframes flt-c { 0%,100%{transform:translate(-50%,-50%)} 50%{transform:translate(-50%,calc(-50% - 9px))} }
+.cc-lbl { display:block; font-family:var(--f-m); font-size:.55rem; color:rgba(255,255,255,.35); margin-bottom:.3rem; letter-spacing:.06em; text-transform:uppercase; }
+.cc-big { display:block; font-family:var(--f-d); font-weight:800; font-size:1.6rem; letter-spacing:-.048em; color:#fff; line-height:1; margin-bottom:.4rem; }
+.cc-sub { display:block; font-family:var(--f-m); font-size:.55rem; color:rgba(255,255,255,.3); }
+.cc-bar { height:2px; background:rgba(255,255,255,.1); border-radius:2px; overflow:hidden; margin-top:.5rem; }
+.cc-fill { height:100%; width:0; background:#fff; transition:width 1.9s var(--ease) 1s; }
+.cta-final.on .cc-fill { width:97%; }
+.cc-dot { width:8px; height:8px; border-radius:50%; background:#fff; box-shadow:0 0 10px rgba(255,255,255,.6); animation:blink 1.8s ease-in-out infinite; flex-shrink:0; }
+.cc-live-txt { font-family:var(--f-d); font-weight:700; font-size:.82rem; color:#fff; }
+
+/* ════ ANIMATIONS EXTRA ════ */
+
+/* Marquee hover — item individuel s'illumine */
+.marquee-item { transition: color .2s; }
+.marquee-track:hover .marquee-item:hover { color: #111; }
+
+/* Proof items — hover subtil */
+.proof-item { transition: transform .3s var(--ease); }
+.proof-item:hover { transform: translateY(-3px); }
+.proof-val { transition: letter-spacing .3s var(--ease); }
+.proof-item:hover .proof-val { letter-spacing: -.01em; }
+
+/* Hero badge — shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.hero__badge {
+  background: linear-gradient(90deg, transparent 30%, rgba(0,0,0,.04) 50%, transparent 70%);
+  background-size: 200% auto;
+  animation: vlu .5s var(--ease) .1s forwards, shimmer 3.5s linear 1s infinite;
+}
+
+/* Feat border-left reveal */
+.feat { transition: opacity .6s var(--ease), transform .6s var(--ease), background .25s; }
+
+/* Stat num — chiffre italique au hover */
+.stat-num { transition: transform .35s var(--ease), font-style .2s; }
+.stat:hover .stat-num { transform: translateY(-5px); font-style: italic; }
+
+/* Step item — barre gauche qui monte */
+.step-item::after {
+  content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: transparent;
+  transition: background .22s;
+}
+.step-item.on::after { background: #111; }
+
+/* CTA cards — scale au hover */
+.ctaf-card { transition: opacity .5s ease, transform .3s var(--ease) !important; }
+.ctaf-card:hover { transform: scale(1.04) !important; }
+.cc-score:hover { transform: scale(1.04) translateY(0) !important; }
+.cc-time:hover  { transform: scale(1.04) translateY(0) !important; }
+
+/* Nav cta — pulse subtil au load */
+@keyframes navPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+  50%     { box-shadow: 0 0 0 5px rgba(0,0,0,.06); }
+}
+.nav__cta { animation: navPulse 3s ease 2s 2; }
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:960px){
+  .hero__foot { grid-template-columns:1fr; }
+  .hero__ctas { align-items:flex-start; flex-direction:row; flex-wrap:wrap; }
+  .hero__proof { flex-wrap:wrap; gap:1.5rem; }
+  .feats { grid-template-columns:1fr; }
+  .feat { border-right:none; border-bottom:1px solid var(--border); }
+  .feat:last-child { border-bottom:none; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .stat:nth-child(2){ border-right:none; }
+  .stat:nth-child(3){ border-top:1px solid var(--border); }
+  .stat:nth-child(4){ border-top:1px solid var(--border); border-right:none; }
+  .process-wrap { grid-template-columns:1fr; gap:2.5rem; }
+  .code-win { display:none; }
+  .cta-final { grid-template-columns:1fr; }
+  .ctaf-left { border-right:none; border-bottom:1px solid var(--border); }
+  .ctaf-right { min-height:260px; }
+}
+@media(max-width:580px){
+  .hero__h1 { font-size:clamp(3rem,13vw,4rem); }
+  .stats-row { grid-template-columns:1fr; }
+  .stat { border-right:none; border-bottom:1px solid var(--border); }
+  .stat:last-child { border-bottom:none; }
+}
+
+
+
+/* ── WHATSAPP BUTTON ── */
+#wa-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 52px;
+  height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4);
+  z-index: 9999;
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+  text-decoration: none;
+}
+#wa-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,.5);
+}
+@media(max-width:600px){
+  #wa-btn { bottom: 1.2rem; right: 1.2rem; width:46px; height:46px; }
+}
+</style>
+</head>
+<body>
+<div id="vl-cursor"></div>
+<div id="vl-ring"></div>
+<div id="vl-prog"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="home.html" class="nav__logo">
+      <img src="logo.png" alt="VL" style="width:46px;height:46px;object-fit:cover;border-radius:12px;display:block;">
+      <span class="nav__logo-txt" >Vertex Link</span>
+    </a>
+    <nav class="nav__links">
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="portfolio.html" class="nav__link">Projets</a>
+      <a href="a-propos.html" class="nav__link">À propos</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__cta js-mag">Réserver un appel</a>
+    <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Projets</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="m-cta">Réserver un appel →</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hmark hm1"></div><div class="hmark hm2"></div>
+  <div class="hmark hm3"></div><div class="hmark hm4"></div>
+  <span class="hero__corner hc-bl">FR — Remote</span>
+  <span class="hero__corner hc-br">© 2025</span>
+
+  <div class="hero__inner">
+    <div class="hero__badge"><span class="badge-dot"></span>Disponible · 2 places ce mois</div>
+    <h1 class="hero__h1">
+        <span class="ln ln--badge"><span class="li">Des sites</span><span class="h1-badge">100%</span></span>
+        <span class="ln"><span class="li">qui donnent</span></span>
+        <span class="ln"><span class="li">envie d'<em>agir.</em></span></span>
+      </h1>
+    <div class="hero__foot">
+      <p class="hero__sub">Votre site en 14 jours, codé à la main, zéro template. Un design pensé pour convertir — pas juste pour faire joli.</p>
+      <div class="hero__ctas">
+        <a href="contact.html" class="btn btn--dark js-mag">Démarrer un projet <span class="arr">→</span></a>
+        <a href="portfolio.html" class="btn btn--ghost js-mag">Voir nos projets</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__proof">
+    <div class="proof-item"><span class="proof-val">97+</span><span class="proof-lbl">Lighthouse</span></div>
+    <span class="proof-sep"></span>
+    <div class="proof-item"><span class="proof-val">14j</span><span class="proof-lbl">Mise en ligne &amp; suivi</span></div>
+    <span class="proof-sep"></span>
+    <div class="proof-item"><span class="proof-val">100%</span><span class="proof-lbl">Sur mesure</span></div>
+    <span class="proof-sep"></span>
+    <div class="proof-item"><span class="proof-val">★★★★★</span><span class="proof-lbl">Clients satisfaits</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">HTML / CSS / JS<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Design sur mesure<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SEO Technique<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Core Web Vitals<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mobile First<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lighthouse 97+<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hébergement inclus<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Pixel Meta<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Google Analytics<span class="marquee-dot"></span></span>
+    <span class="marquee-item">HTML / CSS / JS<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Design sur mesure<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SEO Technique<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Core Web Vitals<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mobile First<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lighthouse 97+<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hébergement inclus<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Pixel Meta<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Google Analytics<span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow">Ce qu'on fait</p>
+    <h2 class="h2">Un site qui travaille<br><em>pour vous.</em></h2>
+    <div class="feats">
+      <div class="feat">
+        <span class="feat-deco">01</span>
+        <div class="feat-n">01</div>
+        <div class="feat-title js-sc">Code qui performe</div>
+        <p class="feat-desc">Chaque page construite à la main. Pas de builder, pas de surcharge — du code propre qui charge en un éclair et garde vos visiteurs.</p>
+        <div class="feat-tags"><span class="feat-tag">Lighthouse 97+</span><span class="feat-tag">Core Web Vitals</span><span class="feat-tag">Code propre</span></div>
+      </div>
+      <div class="feat">
+        <span class="feat-deco">02</span>
+        <div class="feat-n">02</div>
+        <div class="feat-title js-sc">Design qui convertit</div>
+        <p class="feat-desc">On part de votre activité, vos clients, votre ton. Le design découle de ça — pas d'un template Wordpress ou Wix.</p>
+        <div class="feat-tags"><span class="feat-tag">100% sur mesure</span><span class="feat-tag">Mobile-first</span><span class="feat-tag">Identité cohérente</span></div>
+      </div>
+      <div class="feat">
+        <span class="feat-deco">03</span>
+        <div class="feat-n">03</div>
+        <div class="feat-title js-sc">Visible sur Google</div>
+        <p class="feat-desc">Structure, balises, vitesse — tout ce que Google regarde est traité dès le départ, pas ajouté après en option payante.</p>
+        <div class="feat-tags"><span class="feat-tag">SEO on-page</span><span class="feat-tag">Schema.org</span><span class="feat-tag">Analytics inclus</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section" style="background:#111;padding-top:clamp(4rem,8vw,7rem);padding-bottom:clamp(4rem,8vw,7rem);">
+  <div class="section__inner">
+    <p class="eyebrow" style="color:rgba(255,255,255,.4);">En chiffres</p>
+    <h2 class="h2" style="color:#fff;">Ce qu'on <em>garantit.</em></h2>
+    <div class="stats-row js-stats">
+      <div class="stat js-stat" data-to="97"><div class="stat-num"><span class="js-count">97</span><sup>+</sup></div><div class="stat-lbl">Score Lighthouse moyen</div></div>
+      <div class="stat js-stat" data-to="14"><div class="stat-num"><span class="js-count">14</span><sup>j</sup></div><div class="stat-lbl">Délai garanti</div></div>
+      <div class="stat"><div class="stat-num">2<sup>×</sup></div><div class="stat-lbl">Paiement sans frais</div></div>
+      <div class="stat"><div class="stat-num">0<sup>€</sup></div><div class="stat-lbl">Frais cachés</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow">Comment ça marche</p>
+    <h2 class="h2">4 étapes.<br><em>Zéro surprise.</em></h2>
+    <div class="process-wrap">
+      <div id="steps">
+        <div class="step-item on" data-i="0"><span class="step-n">01</span><div><div class="step-t">On clarifie le projet</div><p class="step-d">Objectifs, cible, délais. Tout est défini clairement avant de démarrer — aucune zone floue.</p></div></div>
+        <div class="step-item" data-i="1"><span class="step-n">02</span><div><div class="step-t">On pose les bases</div><p class="step-d">Maquette et structure validées par vous avant qu'une seule ligne de code soit écrite.</p></div></div>
+        <div class="step-item" data-i="2"><span class="step-n">03</span><div><div class="step-t">On développe</div><p class="step-d">HTML/CSS/JS codé à la main. Propre, rapide, responsive. Zéro builder, zéro template.</p></div></div>
+        <div class="step-item" data-i="3"><span class="step-n">04</span><div><div class="step-t">On livre et on reste là</div><p class="step-d">Mise en ligne, DNS, hébergement inclus. Support post-livraison pour que tout reste au vert.</p></div></div>
+      </div>
+      <div class="code-win js-cw">
+        <div class="cw-bar">
+          <span class="cw-d cwd-r"></span><span class="cw-d cwd-y"></span><span class="cw-d cwd-g"></span>
+          <span class="cw-file" id="cw-file">brief.json</span>
+        </div>
+        <div class="cw-body" id="cw-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section">
+  <div class="section__inner">
+    <div class="cta-final js-ctaf">
+      <div class="ctaf-left">
+        <div class="ctaf-avail"><span class="ctaf-dot"></span>Disponible maintenant</div>
+        <h2 class="ctaf-h">
+          <span class="ctaf-ln"><span class="ctaf-li">Votre site,</span></span>
+          <span class="ctaf-ln"><span class="ctaf-li">codé à la</span></span>
+          <span class="ctaf-ln"><span class="ctaf-li"><em>main.</em></span></span>
+        </h2>
+        <p class="ctaf-p" data-words>Devis gratuit · Réponse sous 24h · Sans engagement</p>
+        <div class="ctaf-btns">
+          <a href="contact.html" class="btn btn--dark js-mag">Obtenir un devis gratuit <span class="arr">→</span></a>
+          <a href="services.html" class="btn btn--ghost js-mag">Voir les offres</a>
+        </div>
+        <p class="ctaf-note">Paiement en 2× · Hébergement inclus · Support inclus</p>
+      </div>
+      <div class="ctaf-right">
+        <div class="ctaf-grid"></div>
+        <div class="ctaf-card cc-score">
+          <span class="cc-lbl">Lighthouse</span>
+          <span class="cc-big">97</span>
+          <div class="cc-bar"><div class="cc-fill"></div></div>
+        </div>
+        <div class="ctaf-card cc-time">
+          <span class="cc-lbl">Mise en ligne &amp; suivi</span>
+          <span class="cc-big">14j</span>
+          <span class="cc-sub">garanti contractuellement</span>
+        </div>
+        <div class="ctaf-card cc-live">
+          <span class="cc-dot"></span>
+          <span class="cc-live-txt">Site en ligne</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">
+          <img src="logo.png" alt="VL" style="width:28px;height:28px;object-fit:contain;background:#111;border-radius:7px;padding:4px;">
+          Vertex Link
+        </div>
+        <p class="footer__desc">Agence web — sites vitrines &amp; landing pages codés sur mesure.</p>
+      </div>
+      <div class="footer__col"><h3 class="footer__col-title">Navigation</h3><ul><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Projets</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Offres</h3><ul><li><a href="services.html">Pack Starter — 397€</a></li><li><a href="services.html">Pack Premium — 500€</a></li><li><a href="services.html">Sur mesure</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Contact</h3><ul><li><a href="mailto:vertexlink33@gmail.com">vertexlink33@gmail.com</a></li><li><a href="https://instagram.com/vertexlink_" target="_blank">@vertexlink_</a></li></ul><div style="margin-top:1.5rem"><a href="contact.html" class="btn btn--dark" style="font-size:.74rem;padding:.5rem 1.1rem">Réserver →</a></div></div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Vertex Link — Tous droits réservés</p>
+      <div class="footer__social"><a href="mailto:vertexlink33@gmail.com">Email</a><a href="https://instagram.com/vertexlink_" target="_blank">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+(function(){
+
+/* 1. SCROLL REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+},{threshold:.1});
+document.querySelectorAll('.eyebrow,.h2,.feat,.js-cw').forEach(el=>io.observe(el));
+
+/* 2. STATS COUNTER */
+function countUp(el,to){
+  let t0; const dur=1500, ease=p=>1-Math.pow(1-p,3);
+  (function tick(ts){ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1); el.textContent=Math.round(ease(p)*to); if(p<1)requestAnimationFrame(tick); })(performance.now());
+}
+const statsEl=document.querySelector('.js-stats');
+if(statsEl) new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.stat').forEach((s,i)=>setTimeout(()=>{
+      s.classList.add('on');
+      const c=s.querySelector('.js-count'),to=parseInt(s.dataset.to);
+      if(c&&to)countUp(c,to);
+    },i*110));
+  });
+},{threshold:.25}).observe(statsEl);
+
+/* 3. CODE WINDOW */
+const SNIPS=[
+  {f:'brief.json',l:[{n:'1',c:'<span class="cp">{</span>'},{n:'2',c:'  <span class="cs">"Objectif"</span><span class="cp">:</span> <span class="cs">"Convertir"</span><span class="cp">,</span>'},{n:'3',c:'  <span class="cs">"Délai"</span><span class="cp">:</span> <span class="cs">"14 jours"</span><span class="cp">,</span>'},{n:'4',c:'  <span class="cs">"Risque"</span><span class="cp">:</span> <span class="cs">"Zéro"</span>'},{n:'5',c:'<span class="cp">}</span>'}]},
+  {f:'design.css',l:[{n:'1',c:'<span class="cc">/* Votre identité */</span>'},{n:'2',c:'<span class="cp">:root {</span>'},{n:'3',c:'  <span class="ck">--mobile</span><span class="cp">:</span> <span class="cs">"100% OK"</span><span class="cp">;</span>'},{n:'4',c:'  <span class="ck">--lighthouse</span><span class="cp">:</span> <span class="cn">97</span><span class="cp">;</span>'},{n:'5',c:'<span class="cp">}</span>'}]},
+  {f:'build.js',l:[{n:'1',c:'<span class="ck">function</span> <span class="cf">build</span><span class="cp">() {</span>'},{n:'2',c:'  <span class="cf">codeManuel</span><span class="cp">();</span>'},{n:'3',c:'  <span class="cf">optimiserSEO</span><span class="cp">();</span>'},{n:'4',c:'  <span class="ck">return</span> <span class="cs">"97/100"</span><span class="cp">;</span>'},{n:'5',c:'<span class="cp">}</span>'}]},
+  {f:'terminal',l:[{n:'›',c:'<span class="cp">Déploiement...</span>'},{n:'›',c:'<span class="ck">✔</span> <span class="cp">DNS configuré</span>'},{n:'›',c:'<span class="ck">✔</span> <span class="cp">Hébergement actif</span>'},{n:'›',c:'<span class="ck">✔</span> <span class="cp">Lighthouse <span class="cn">97</span>/100</span>'},{n:'›',c:'<span class="ck">✔ SITE EN LIGNE</span>'}]},
+];
+function showCode(i){ const s=SNIPS[i],fw=document.getElementById('cw-file'),bw=document.getElementById('cw-body'); if(!fw||!bw)return; fw.textContent=s.f; bw.innerHTML=s.l.map(r=>`<div class="cw-row"><span class="cw-ln">${r.n}</span><span class="cw-code">${r.c}</span></div>`).join(''); }
+showCode(0);
+const stepEls=document.querySelectorAll('.step-item');
+stepEls.forEach(el=>el.addEventListener('click',()=>{ stepEls.forEach(s=>s.classList.remove('on')); el.classList.add('on'); showCode(+el.dataset.i); }));
+
+/* 4. CTA FINAL */
+const ctaf=document.querySelector('.js-ctaf');
+if(ctaf) new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting)e.target.classList.add('on'); }),{threshold:.18}).observe(ctaf);
+
+/* 5. HERO PARALLAX */
+(function(){
+  const hero=document.querySelector('.hero');
+  if(!hero||window.matchMedia('(hover:none)').matches)return;
+  const layers=[{el:document.querySelector('.hero__h1'),s:.016},{el:document.querySelector('.hero__foot'),s:.009},{el:document.querySelector('.hero__proof'),s:.005}].filter(l=>l.el);
+  let tx=0,ty=0,cx=0,cy=0;
+  const W=innerWidth/2,H=innerHeight/2;
+  hero.addEventListener('mousemove',e=>{ tx=(e.clientX-W)/W; ty=(e.clientY-H)/H; });
+  hero.addEventListener('mouseleave',()=>{ tx=0; ty=0; });
+  (function loop(){ cx+=(tx-cx)*.06; cy+=(ty-cy)*.06; layers.forEach(l=>{ l.el.style.transform=`translate(${cx*l.s*40}px,${cy*l.s*40}px)`; }); requestAnimationFrame(loop); })();
+})();
+
+/* 6. MAGNETIC BUTTONS */
+document.querySelectorAll('.js-mag').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{ const r=btn.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22; btn.style.transform=`translate(${x}px,${y}px)`; btn.style.transition='transform .1s ease'; });
+  btn.addEventListener('mouseleave',()=>{ btn.style.transform=''; btn.style.transition='transform .5s cubic-bezier(.16,1,.3,1)'; });
+});
+
+/* 7. TEXT SCRAMBLE feat titles */
+const SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function scramble(el){ const orig=el.textContent; let i=0; clearInterval(el._sc); el._sc=setInterval(()=>{ el.textContent=orig.split('').map((c,j)=>{ if(c===' ')return ' '; if(j<i)return orig[j]; return SC[Math.floor(Math.random()*SC.length)]; }).join(''); i+=1.7; if(i>orig.length){ el.textContent=orig; clearInterval(el._sc); } },35); }
+document.querySelectorAll('.js-sc').forEach(el=>{ el.closest('.feat').addEventListener('mouseenter',()=>scramble(el)); });
+
+/* 8. PROOF — stagger reveal */
+const proofEl=document.querySelector('.hero__proof');
+if(proofEl) new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.proof-item,.proof-sep').forEach((el,i)=>{
+      el.style.opacity='0'; el.style.transform='translateY(8px)';
+      setTimeout(()=>{ el.style.transition='opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)'; el.style.opacity='1'; el.style.transform='none'; },820+i*75);
+    });
+  });
+},{threshold:.5}).observe(proofEl);
+
+/* 9. STEPS — auto-cycle */
+let _lc=0,_ci=0;
+const _st=document.querySelectorAll('.step-item');
+setInterval(()=>{ if(Date.now()-_lc>3800){ _ci=(_ci+1)%_st.length; _st.forEach(s=>s.classList.remove('on')); _st[_ci]?.classList.add('on'); showCode(_ci); } },3000);
+_st.forEach((el,i)=>el.addEventListener('click',()=>{ _lc=Date.now(); _ci=i; }));
+
+/* 10. EYEBROW — letter-spacing hover */
+document.querySelectorAll('.eyebrow').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ el.style.letterSpacing='.2em'; el.style.transition='letter-spacing .4s cubic-bezier(.16,1,.3,1)'; });
+  el.addEventListener('mouseleave',()=>{ el.style.letterSpacing='.14em'; });
+});
+
+})();
+</script>
+
+<!-- WhatsApp flottant -->
+<a href="https://wa.me/33781971786" target="_blank" id="wa-btn" aria-label="WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.14 1.541 5.876L.057 23.886a.5.5 0 00.611.612l6.089-1.459A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.866 9.866 0 01-5.031-1.378l-.361-.214-3.741.897.934-3.658-.235-.375A9.867 9.867 0 012.1 12C2.1 6.533 6.533 2.1 12 2.1c5.467 0 9.9 4.433 9.9 9.9 0 5.467-4.433 9.9-9.9 9.9z"/>
+  </svg>
+</a>
+
+<style>
+#wa-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 52px;
+  height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(37,211,102,.35);
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+  cursor: none !important;
+}
+#wa-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,.5);
+}
+</style>
+</body>
+</html>
