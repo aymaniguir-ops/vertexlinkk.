@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Vertex Link">
+<meta property="og:description" content="Démarrez votre projet web. Réponse sous 24h, devis gratuit.">
+<meta property="og:site_name" content="Vertex Link">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact — Vertex Link">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Contact Vertex Link — Devis gratuit, réponse sous 24h. vertexlink33@gmail.com">
+<title>Contact — Vertex Link</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Inter:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:5rem; align-items:start; margin-top:3.5rem; }
+
+.contact-info-title { font-family:var(--f-d); font-weight:800; font-size:clamp(1.5rem,3vw,2.2rem); letter-spacing:-.038em; line-height:1.1; color:#111; margin-bottom:1.25rem; }
+.contact-info-title em { font-style:italic; font-weight:400; color:var(--muted); }
+.contact-info-p { font-family:var(--f-m); font-size:.8rem; color:var(--muted); line-height:1.85; margin-bottom:2.5rem; }
+
+.contact-links { display:flex; flex-direction:column; gap:.75rem; margin-bottom:2.5rem; }
+.contact-link-item { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; background:var(--bg2); border:1px solid var(--border); border-radius:10px; transition:border-color .2s,background .2s; color:inherit; }
+.contact-link-item:hover { border-color:rgba(0,0,0,.2); background:var(--bg3); }
+.cli-icon { width:34px; height:34px; border-radius:8px; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
+.cli-label { font-family:var(--f-m); font-size:.64rem; color:var(--muted); letter-spacing:.04em; margin-bottom:.15rem; }
+.cli-value { font-family:var(--f-d); font-weight:700; font-size:.86rem; letter-spacing:-.01em; color:#111; }
+
+/* FAQ */
+.faq-list { display:flex; flex-direction:column; margin-top:2.5rem; }
+.faq-title { font-family:var(--f-d); font-weight:800; font-size:1.5rem; letter-spacing:-.04em; color:#111; margin-bottom:1.5rem; }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-item:first-of-type { border-top:1px solid var(--border); }
+.faq-q { display:flex; align-items:center; justify-content:space-between; padding:1rem 0; font-family:var(--f-d); font-weight:700; font-size:.88rem; letter-spacing:-.02em; color:#111; cursor:none; transition:color .2s; user-select:none; }
+.faq-q:hover { color:#e85c2e; }
+.faq-arrow { font-size:.8rem; color:var(--faint); transition:transform .3s var(--ease); flex-shrink:0; line-height:1; }
+.faq-item.open .faq-arrow { transform:rotate(45deg); }
+.faq-a { font-family:var(--f-m); font-size:.78rem; color:var(--muted); line-height:1.8; overflow:hidden; max-height:0; transition:max-height .4s var(--ease),padding .3s; }
+.faq-item.open .faq-a { max-height:200px; padding-bottom:1.25rem; }
+
+/* FORM */
+.form-card { background:var(--bg2); border:1px solid var(--border); border-radius:18px; padding:2.5rem; }
+.form-title { font-family:var(--f-d); font-weight:800; font-size:1.2rem; letter-spacing:-.025em; color:#111; margin-bottom:.35rem; }
+.form-sub { font-family:var(--f-m); font-size:.72rem; color:var(--muted); margin-bottom:2rem; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-group { display:flex; flex-direction:column; gap:.45rem; margin-bottom:1.2rem; }
+.form-label { font-family:var(--f-m); font-size:.65rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
+.form-input,.form-select,.form-textarea { background:#fff; border:1px solid var(--border2); border-radius:8px; padding:.72rem 1rem; font-family:var(--f-m); font-size:.8rem; color:#111; outline:none; transition:border-color .2s,box-shadow .2s; width:100%; }
+.form-input:focus,.form-select:focus,.form-textarea:focus { border-color:#e85c2e; box-shadow:0 0 0 3px rgba(0,0,0,.06); }
+.form-input::placeholder,.form-textarea::placeholder { color:var(--faint); }
+.form-select { color:var(--muted); }
+.form-textarea { resize:vertical; min-height:120px; line-height:1.65; }
+.form-submit { width:100%; padding:.875rem; font-family:var(--f-d); font-weight:800; font-size:.9rem; background:#e85c2e; color:#fff; border-radius:8px; border:none; cursor:none; transition:background .2s,transform .25s var(--ease),box-shadow .25s; }
+.form-submit:hover { background:#333; transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,0,0,.18); }
+.form-success { display:none; text-align:center; padding:2rem; font-family:var(--f-m); font-size:.82rem; color:var(--muted); }
+.form-success strong { display:block; font-family:var(--f-d); font-weight:800; font-size:1.2rem; color:#111; margin-bottom:.5rem; }
+
+@media(max-width:860px){ .contact-grid{grid-template-columns:1fr} .form-row{grid-template-columns:1fr} }
+
+/* ── ANIMATIONS EXTRA CONTACT ── */
+.contact-link-item { opacity:0; transform:translateX(-12px); transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),border-color .2s,background .2s; }
+.contact-link-item.on { opacity:1; transform:none; }
+.contact-link-item:nth-child(2).on { transition-delay:.12s; }
+.faq-item { opacity:0; transform:translateY(8px); transition:opacity .5s ease,transform .5s ease; }
+.faq-item.on { opacity:1; transform:none; }
+.form-group { opacity:0; transform:translateY(10px); transition:opacity .5s ease,transform .5s ease; }
+.form-group.on { opacity:1; transform:none; }
+.form-card.on .form-group { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+<div id="vl-cursor"></div><div id="vl-ring"></div><div id="vl-prog"></div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="home.html" class="nav__logo"><img src="logo.png" alt="VL" style="width:46px;height:46px;object-fit:cover;border-radius:12px;display:block;"><span class="nav__logo-txt" >Vertex Link</span></a>
+    <nav class="nav__links">
+      <a href="home.html" class="nav__link">Accueil</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="portfolio.html" class="nav__link">Projets</a>
+      <a href="a-propos.html" class="nav__link">À propos</a>
+      <a href="contact.html" class="nav__link active">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__cta">Nous contacter</a>
+    <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="home.html">Accueil</a><a href="services.html">Services</a><a href="portfolio.html">Projets</a><a href="a-propos.html">À propos</a><a href="contact.html">Contact</a>
+  <a href="contact.html" class="m-cta">Réserver un appel →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="page-hero__num">05 — Contact</span>
+    <h1 class="page-hero__h1">
+          <span class="split-wrap"><span class="split-line">Parlons de</span></span><span class="split-wrap"><span class="split-line">votre <em>projet.</em></span></span>
+        </h1>
+    <p class="page-hero__p" data-words>Devis gratuit, réponse sous 24h. Pas de téléprospection — juste une conversation directe pour comprendre vos besoins.</p>
+  </div>
+</div>
+
+<main>
+<section class="section">
+  <div class="section__inner">
+    <div class="contact-grid">
+
+      <!-- INFO + FAQ -->
+      <div>
+        <h2 class="contact-info-title">On est <em>disponibles.</em></h2>
+        <p class="contact-info-p">Que vous ayez un projet précis ou juste une idée, c'est le bon endroit pour en parler. On répond sous 24h, sans pression.</p>
+
+        <div class="contact-links" data-r data-d="1">
+          <a href="mailto:vertexlink33@gmail.com" class="contact-link-item">
+            <div class="cli-icon">✉️</div>
+            <div><div class="cli-label">Email</div><div class="cli-value">vertexlink33@gmail.com</div></div>
+          </a>
+          <a href="https://instagram.com/vertexlink_" target="_blank" class="contact-link-item">
+            <div class="cli-icon" style="background:#f0e8ff;border-color:rgba(131,58,180,.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#833ab4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#833ab4" stroke="none"/></svg></div>
+            <div><div class="cli-label">Instagram</div><div class="cli-value">@vertexlink_</div></div>
+          </a>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-list" data-r data-d="2">
+          <div class="faq-title">FAQ</div>
+
+          <div class="faq-item">
+            <div class="faq-q">Quel est le délai de livraison ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Site vitrine livré en 7 jours, landing page en 5 jours. Le délai commence après validation du brief et de la maquette. On vous tient informé à chaque étape.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Le paiement en 2× est disponible ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Oui, pour tous les forfaits. 50% à la commande, 50% à la livraison. Aucun frais supplémentaire, aucune surprise.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Dois-je fournir le contenu ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Idéalement oui — textes, logo, photos si disponibles. Si vous n'avez pas de contenu, on peut vous accompagner sur le copywriting et vous conseiller sur les visuels.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Et après la livraison ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Support inclus selon le forfait (60 jours à 6 mois). Corrections, ajustements, petites évolutions — on reste disponibles. Vous n'êtes jamais seul face à votre site.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Vous travaillez avec quel type de client ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Artisans, commerçants, professions libérales, startups, créateurs de contenu. Si vous avez une activité à mettre en valeur en ligne, on peut travailler ensemble.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-card" data-r data-d="2">
+        <div class="form-title">Démarrons ensemble</div>
+        <p class="form-sub">Devis gratuit · Réponse sous 24h · Sans engagement</p>
+
+        <form id="contact-form" action="https://formspree.io/f/mnjbqzqw" method="POST">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Prénom *</label><input class="form-input" type="text" name="prenom" placeholder="Jean" required></div>
+            <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" type="text" name="nom" placeholder="Dupont" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" name="email" placeholder="jean@monentreprise.fr" required></div>
+          <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input" type="tel" name="telephone" placeholder="+33 6 00 00 00 00"></div>
+          <div class="form-group">
+            <label class="form-label">Type de projet *</label>
+            <select class="form-select" name="projet" required>
+              <option value="" disabled selected>Sélectionner...</option>
+              <option>Site vitrine — Pack Starter (397€)</option>
+              <option>Site vitrine — Pack Premium (500€)</option>
+              <option>Projet sur mesure</option>
+              <option>Landing page</option>
+              <option>Refonte de site existant</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Votre message *</label><textarea class="form-textarea" name="message" placeholder="Décrivez votre activité, vos besoins, votre cible..." required></textarea></div>
+          <button type="submit" class="form-submit">Envoyer ma demande →</button>
+        </form>
+        <div class="form-success" id="form-success">
+          <strong>✓ Message envoyé !</strong>
+          On vous répond sous 24h. Merci de votre confiance.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div><div class="footer__logo"><img src="logo.png" alt="VL" style="width:28px;height:28px;object-fit:contain;background:#111;border-radius:7px;padding:4px;">Vertex Link</div><p class="footer__desc">Agence web — sites vitrines &amp; landing pages codés sur mesure.</p></div>
+      <div class="footer__col"><h3 class="footer__col-title">Navigation</h3><ul><li><a href="home.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Offres</h3><ul><li><a href="services.html">Pack Starter — 397€</a></li><li><a href="services.html">Pack Premium — 500€</a></li><li><a href="services.html">Sur mesure</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Contact</h3><ul><li><a href="mailto:vertexlink33@gmail.com">vertexlink33@gmail.com</a></li><li><a href="https://instagram.com/vertexlink_" target="_blank">@vertexlink_</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><p class="footer__copy">© 2025 Vertex Link</p><div class="footer__social"><a href="mailto:vertexlink33@gmail.com">Email</a><a href="https://instagram.com/vertexlink_" target="_blank">Instagram</a></div></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+(function(){
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);} }),{threshold:.08});
+  document.querySelectorAll('.eyebrow,.h2,.contact-link-item,.faq-item,.form-card').forEach(el=>io.observe(el));
+  document.querySelectorAll('.contact-link-item').forEach((el,i)=>el.style.transitionDelay=(i*.12)+'s');
+  document.querySelectorAll('.faq-item').forEach((el,i)=>el.style.transitionDelay=(i*.07)+'s');
+  // Form groups stagger
+  const fcard=document.querySelector('.form-card');
+  if(fcard) new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.form-group').forEach((el,i)=>setTimeout(()=>el.classList.add('on'),i*70+200));
+    e.target.classList.add('on');
+  }),{threshold:.1}).observe(fcard);
+
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  // FORM
+  const form=document.getElementById('contact-form');
+  const success=document.getElementById('form-success');
+  if(form) form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const btn=form.querySelector('.form-submit');
+    btn.textContent='Envoi...'; btn.disabled=true;
+    try {
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(res.ok){ form.style.display='none'; success.style.display='block'; }
+      else { btn.textContent='Erreur — Réessayez'; btn.disabled=false; }
+    } catch { btn.textContent='Erreur réseau'; btn.disabled=false; }
+  });
+})();
+</script>
+</body>
+</html>
